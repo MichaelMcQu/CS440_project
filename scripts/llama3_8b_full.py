@@ -170,7 +170,7 @@ class Pipeline:
                             'source_file': problem['source_file']
                         }
                         
-                        print(f"Response received")
+                        print(f"\nResponse received")
                     else:
                         result = {
                             'problem_id': problem['id'],
@@ -277,7 +277,8 @@ class Pipeline:
                         else:
                             f.write(f"ERROR: {result.get('error', 'Unknown error')}\n\n")
                         
-                        f.write("\n================================================================================\n")
+                        f.write("\n--------------------------------------------------------------------------------\n")
+
 
 
 
@@ -289,26 +290,20 @@ if __name__ == "__main__":
     path = kagglehub.dataset_download("awsaf49/math-dataset")
     pipeline = Pipeline(model_name="llama3")
     
-    # categories = [
-    #     "algebra",
-    #     "counting_and_probability",
-    #     "geometry",
-    #     "intermediate_algebra",
-    #     "number_theory"
-    # ]
     categories = [
         "algebra",
         "counting_and_probability",
-        "geometry"
+        "geometry",
+        "intermediate_algebra",
+        "number_theory"
     ]
     
-    # temperatures = [0.3, 0.7, 1.0]
-    temperatures = [0.7]
+    temperatures = [0.3, 0.7, 1.0]
     
+
     results = pipeline.run_study(
         dataset_path=path,
         categories=categories,
         temperatures=temperatures,
         problems_per_temp=2
     )
-    
